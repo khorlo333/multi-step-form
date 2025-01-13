@@ -54,7 +54,11 @@ export default function Main() {
         </div>
       </div>
       <div>
-        <button className="flex py-2.5 px-3 justify-center items-center gap-1 rounded-md bg-[#121316] "></button>
+        <button className="flex py-2.5 px-3 justify-center items-center gap-1 rounded-md bg-[#121316] w-[416px]">
+          {" "}
+          <p className="text-[#fff] text-[16px] font-medium ">Continue 1/3</p>
+          <img src="chevron_right.png" alt="" />
+        </button>
       </div>
     </div>
   );

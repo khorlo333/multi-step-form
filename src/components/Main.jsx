@@ -4,9 +4,45 @@ import { useState } from "react";
 import Button from "./Button";
 
 export default function Main() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [username, setUserName] = useState("");
+  const [formValues, setFormValues] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+  });
+  const [formErrors, setFormErrors] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+  });
+  // const [username, setUserName] = useState("");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormErrors((prev) => ({ ...prev, [name]: "" }));
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+  };
+  const handleClick = () => {
+    const { firstName, lastName, username } = formValues;
+
+    if (!firstName.trim()) {
+      setFormErrors((prev) => ({
+        ...prev,
+        firstName: "Нэрээ оруулна уу",
+      }));
+    }
+
+    if (!lastName.trim()) {
+      setFormErrors((prev) => ({
+        ...prev,
+        lastName: "Овгоо оруулна уу",
+      }));
+    }
+    if (!username.trim()) {
+      setFormErrors((prev) => ({
+        ...prev,
+        username: "Хэрэглэгчийн нэрээ оруулна уу",
+      }));
+    }
+  };
   return (
     <div className="w-[480px] h-[655px] p-[32px] rounded-[8px] flex flex-col justify-between items-start bg-[#fff]">
       <div className="flex flex-col items-start gap-[28px] ">
@@ -21,29 +57,29 @@ export default function Main() {
         </div>
         <div className="flex flex-col items-start gap-[28px] w-[416px]">
           <Input
-            onChange={(e) => setFirstName(e.target.value)}
-            firstName={firstName}
+            onChange={handleChange}
             label="First name"
             placeholder="Your first name"
-            errorText="Нэрээ оруулна уу"
+            name="firstName"
+            errorText={formErrors.firstName}
           />
           <Input
-            onChange={(e) => setLastName(e.target.value)}
-            lastName={lastName}
+            onChange={handleChange}
             label="Last name"
             placeholder="Your last name"
-            errorText="Овгоо оруулна уу"
+            name="lastName"
+            errorText={formErrors.lastName}
           />
           <Input
-            onChange={(e) => setUserName(e.target.value)}
-            username={username}
+            onChange={handleChange}
             label="Username"
             placeholder="Your username"
-            errorText="Хэрэглэгчийн нэрээ оруулна уу"
+            name="username"
+            errorText={formErrors.username}
           />
         </div>
       </div>
-      <Button />
+      <Button handleClick={handleClick} />
     </div>
   );
 }

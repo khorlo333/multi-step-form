@@ -1,7 +1,7 @@
 "use client";
-import { ChevronRight } from "lucide-react";
 import Input from "./Input";
 import { useState } from "react";
+import Button from "./Button";
 
 export default function Main() {
   const [firstName, setFirstName] = useState("");
@@ -21,35 +21,29 @@ export default function Main() {
         </div>
         <div className="flex flex-col items-start gap-[28px] w-[416px]">
           <Input
+            onChange={(e) => setFirstName(e.target.value)}
             firstName={firstName}
-            setFirstName={setFirstName}
             label="First name"
             placeholder="Your first name"
             errorText="Нэрээ оруулна уу"
           />
           <Input
+            onChange={(e) => setLastName(e.target.value)}
             lastName={lastName}
-            setLastName={setLastName}
             label="Last name"
             placeholder="Your last name"
             errorText="Овгоо оруулна уу"
           />
           <Input
+            onChange={(e) => setUserName(e.target.value)}
             username={username}
-            setUserName={setUserName}
             label="Username"
             placeholder="Your username"
             errorText="Хэрэглэгчийн нэрээ оруулна уу"
           />
         </div>
       </div>
-      <div>
-        <button className="flex py-2.5 px-3 justify-center items-center gap-1 rounded-md bg-[#121316] w-[416px]">
-          {" "}
-          <p className="text-[#fff] text-[16px] font-medium ">Continue 1/3</p>
-          <ChevronRight className="text-white" />
-        </button>
-      </div>
+      <Button />
     </div>
   );
 }

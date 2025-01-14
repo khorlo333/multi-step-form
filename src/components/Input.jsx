@@ -1,13 +1,11 @@
 export default function Input({
   label,
   placeholder,
-  username,
-  setUserName,
-  errorText,
+  onChange,
   lastName,
-  setLastName,
+  username,
   firstName,
-  setFirstName,
+  errorText,
 }) {
   let error = "";
   !lastName ? (error = true) : (error = null);
@@ -26,9 +24,11 @@ export default function Input({
         }`}
         type="text"
         placeholder={placeholder}
-        onChange={(e) => setLastName(e.target.value)}
+        onChange={onChange}
       />
-      {error ? <p className="text-[#e14942]">{errorText}</p> : null}
+      {error ? (
+        <p className="text-[#e14942] py-2 mt-[-15px]">{errorText}</p>
+      ) : null}
     </div>
   );
 }

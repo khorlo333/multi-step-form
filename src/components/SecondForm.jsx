@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "./Button";
 import Header from "./Header";
 
-export default function Main() {
+export default function SecondForm({}) {
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",

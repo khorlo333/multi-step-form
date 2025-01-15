@@ -4,16 +4,14 @@ import { useState } from "react";
 import Button from "./Button";
 import Header from "./Header";
 
-export default function Main() {
+export default function ThirdForm() {
   const [formValues, setFormValues] = useState({
-    firstName: "",
-    lastName: "",
-    username: "",
+    dateOfBirth: "",
+    profileImage: "",
   });
   const [formErrors, setFormErrors] = useState({
-    firstName: "",
-    lastName: "",
-    username: "",
+    dateOfBirth: "",
+    profileImage: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,25 +19,19 @@ export default function Main() {
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
   const handleClick = () => {
-    const { firstName, lastName, username } = formValues;
+    const { dateOfBirth, profileImage } = formValues;
 
-    if (!firstName.trim()) {
+    if (!dateOfBirth.trim()) {
       setFormErrors((prev) => ({
         ...prev,
-        firstName: "Нэрээ оруулна уу",
+        dateOfBirth: "Төрсөн өдрөө оруулна уу",
       }));
     }
 
-    if (!lastName.trim()) {
+    if (!profileImage.trim()) {
       setFormErrors((prev) => ({
         ...prev,
-        lastName: "Овгоо оруулна уу",
-      }));
-    }
-    if (!username.trim()) {
-      setFormErrors((prev) => ({
-        ...prev,
-        username: "Хэрэглэгчийн нэрээ оруулна уу",
+        profileImage: "Профайл зургаа оруулна уу",
       }));
     }
   };
@@ -50,24 +42,17 @@ export default function Main() {
         <div className="flex flex-col items-start gap-1 w-[416px]">
           <Input
             onChange={handleChange}
-            label="First name"
-            placeholder="Your first name"
-            name="firstName"
-            errorText={formErrors.firstName}
+            label="Date of birth"
+            type="date"
+            name="dateOfBirth"
+            errorText={formErrors.dateOfBirth}
           />
           <Input
             onChange={handleChange}
-            label="Last name"
-            placeholder="Your last name"
-            name="lastName"
-            errorText={formErrors.lastName}
-          />
-          <Input
-            onChange={handleChange}
-            label="Username"
-            placeholder="Your username"
-            name="username"
-            errorText={formErrors.username}
+            label="Profile image"
+            name="profileImage"
+            type="image"
+            errorText={formErrors.profileImage}
           />
         </div>
       </div>

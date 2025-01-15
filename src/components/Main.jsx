@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "./Button";
 import Header from "./Header";
 
-export default function Main({ click, setCurrentStep, currentStep, onClick }) {
+export default function Main({ setCurrentStep, currentStep }) {
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
@@ -19,6 +19,7 @@ export default function Main({ click, setCurrentStep, currentStep, onClick }) {
     setFormErrors((prev) => ({ ...prev, [name]: "" }));
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
+
   const handleClick = () => {
     const { firstName, lastName, username } = formValues;
 
@@ -27,6 +28,11 @@ export default function Main({ click, setCurrentStep, currentStep, onClick }) {
         ...prev,
         firstName: "Нэрээ оруулна уу",
       }));
+    } else if (/[^a-zA-Z]/.test(firstName)) {
+      setFormErrors((prev) => ({
+        ...prev,
+        firstName: "Текст оруулна уу",
+      }));
     }
 
     if (!lastName.trim()) {
@@ -34,17 +40,29 @@ export default function Main({ click, setCurrentStep, currentStep, onClick }) {
         ...prev,
         lastName: "Овгоо оруулна уу",
       }));
+    } else if (/[^a-zA-Z]/.test(lastName)) {
+      setFormErrors((prev) => ({
+        ...prev,
+        lastName: "Текст оруулна уу",
+      }));
     }
     if (!username.trim()) {
       setFormErrors((prev) => ({
         ...prev,
         username: "Хэрэглэгчийн нэрээ оруулна уу",
       }));
+    } else if (/[^a-zA-Z]/.test(username)) {
+      setFormErrors((prev) => ({
+        ...prev,
+        username: "Текст оруулна уу",
+      }));
+    } else {
+      return setCurrentStep(currentStep + 1);
     }
   };
   return (
-    <div className="w-[480px] h-[655px] p-[32px] rounded-[8px] flex flex-col justify-between items-start bg-[#fff]">
-      <div className="flex flex-col items-start gap-[28px] ">
+    <div className="w-[480px] min-h-[655px] p-[32px] rounded-[8px] flex flex-col justify-between items-start bg-[#fff]">
+      <div className="flex flex-col items-start gap-7 ">
         <Header />
         <div className="flex flex-col items-start gap-1 w-[416px]">
           <Input
@@ -73,7 +91,9 @@ export default function Main({ click, setCurrentStep, currentStep, onClick }) {
           />
         </div>
       </div>
-      <Button onClick={onClick} handleClick={handleClick} />
+      <div className="w-full">
+        <Button handleClick={handleClick} currentStep={currentStep} />
+      </div>
     </div>
   );
 }

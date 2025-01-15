@@ -1,6 +1,6 @@
 export default function FourthForm() {
   return (
-    <div className="w-[480px] p-[32px] rounded-[8px] flex flex-col justify-between items-start bg-[#fff]">
+    <div className="min-w-[480px] p-[32px] rounded-[8px] flex flex-col justify-between items-start bg-[#fff]">
       <img src="Main 1.png" alt="" />
       <h2 className="text-[#202124] text-[26px] text-normal font-semibold  ">
         You're All Set 🔥

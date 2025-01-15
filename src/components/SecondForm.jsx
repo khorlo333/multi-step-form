@@ -4,7 +4,7 @@ import Button from "./Button";
 import Header from "./Header";
 import BackButton from "./BackButton";
 
-export default function SecondForm() {
+export default function SecondForm({ setCurrentStep, currentStep }) {
   const [formValues, setFormValues] = useState({
     email: "",
     phoneNumber: "",
@@ -30,12 +30,27 @@ export default function SecondForm() {
         ...prev,
         email: "Мэйл хаягаа оруулна уу",
       }));
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setFormErrors((prev) => ({
+        ...prev,
+        email: "Зөв мэйл хаяг оруулна уу",
+      }));
     }
 
     if (!phoneNumber.trim()) {
       setFormErrors((prev) => ({
         ...prev,
         phoneNumber: "Утасны дугаараа оруулна уу",
+      }));
+    } else if (!/^\+?\d{8}$/.test(phoneNumber)) {
+      setFormErrors((prev) => ({
+        ...prev,
+        phoneNumber: "Тоо оруулна уу",
+      }));
+    } else if (phoneNumber.length < 8) {
+      setFormErrors((prev) => ({
+        ...prev,
+        phoneNumber: "8 оронтой дугаар оруулна уу.",
       }));
     }
     if (!password.trim()) {
@@ -50,12 +65,29 @@ export default function SecondForm() {
         confirmPassword: "Нууц үгээ давтаж оруулна уу",
       }));
     }
+    if (password.length < 6) {
+      setFormErrors((prev) => ({
+        ...prev,
+        password: "6 оронтой дугаар оруулна уу.",
+      }));
+    } else if (password !== confirmPassword) {
+      setFormErrors((prev) => ({
+        ...prev,
+        confirmPassword: "Таны оруулсан нууц үг таарахгүй байна.",
+      }));
+    } else {
+      return setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handleClickBack = () => {
+    return setCurrentStep(currentStep - 1);
   };
   return (
-    <div className="w-[480px] h-[655px] p-[32px] rounded-[8px] flex flex-col justify-between items-start bg-[#fff]">
+    <div className="w-[480px] min-h-[655px] p-[32px] rounded-[8px] flex flex-col justify-between items-start bg-[#fff]">
       <div className="flex flex-col items-start gap-[28px] ">
         <Header />
-        <div className="flex flex-col items-start gap-[28px] w-[416px]">
+        <div className="flex flex-col items-start gap-1 w-[416px]">
           <Input
             onChange={handleChange}
             label="Email"
@@ -90,9 +122,9 @@ export default function SecondForm() {
           />
         </div>
       </div>
-      <div className="flex w-[100%] justify-between">
-        <BackButton />
-        <Button handleClick={handleClick} />
+      <div className="flex w-[100%] gap-2 justify-between">
+        <BackButton handleClick={handleClickBack} />
+        <Button handleClick={handleClick} currentStep={currentStep} />
       </div>
     </div>
   );

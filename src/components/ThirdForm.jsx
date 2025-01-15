@@ -4,7 +4,7 @@ import Button from "./Button";
 import Header from "./Header";
 import BackButton from "./BackButton";
 
-export default function ThirdForm() {
+export default function ThirdForm({ setCurrentStep, currentStep }) {
   const [formValues, setFormValues] = useState({
     dateOfBirth: "",
     profileImage: "",
@@ -34,6 +34,11 @@ export default function ThirdForm() {
         profileImage: "Профайл зурагаа оруулна уу",
       }));
     }
+    return setCurrentStep(currentStep + 1);
+  };
+
+  const handleClickBack = () => {
+    return setCurrentStep(currentStep - 1);
   };
   return (
     <div className="w-[480px] h-[655px] p-[32px] rounded-[8px] flex flex-col justify-between items-start bg-[#fff]">
@@ -55,9 +60,9 @@ export default function ThirdForm() {
           />
         </div>
       </div>
-      <div className="flex w-[100%] justify-between">
-        <BackButton />
-        <Button handleClick={handleClick} />
+      <div className="flex w-[100%] gap-2 justify-between">
+        <BackButton handleClick={handleClickBack} />
+        <Button handleClick={handleClick} currentStep={currentStep} />
       </div>
     </div>
   );

@@ -46,7 +46,7 @@ export default function Main({ click, setCurrentStep, currentStep, onClick }) {
     <div className="w-[480px] h-[655px] p-[32px] rounded-[8px] flex flex-col justify-between items-start bg-[#fff]">
       <div className="flex flex-col items-start gap-[28px] ">
         <Header />
-        <div className="flex flex-col items-start gap-[28px] w-[416px]">
+        <div className="flex flex-col items-start gap-1 w-[416px]">
           <Input
             onChange={handleChange}
             label="First name"

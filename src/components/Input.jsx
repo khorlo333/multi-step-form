@@ -23,6 +23,3 @@ export default function Input({
     </div>
   );
 }
-// ${
-//   error ? "border-[#e14942]" : "focus:border-[#0ca5e9]"
-// }

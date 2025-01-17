@@ -3,6 +3,7 @@ import { useState } from "react";
 import Button from "./Button";
 import Header from "./Header";
 import BackButton from "./BackButton";
+import * as motion from "motion/react-client";
 
 export default function ThirdForm({ setCurrentStep, currentStep }) {
   const [formValues, setFormValues] = useState({
@@ -41,7 +42,13 @@ export default function ThirdForm({ setCurrentStep, currentStep }) {
     return setCurrentStep(currentStep - 1);
   };
   return (
-    <div className="w-[480px] h-[655px] p-[32px] rounded-[8px] flex flex-col justify-between items-start bg-[#fff]">
+    <motion.div
+      className="w-[480px] h-[655px] p-[32px] rounded-[8px] flex flex-col justify-between items-start bg-[#fff]"
+      initial={{ opacity: 0, x: 0 }}
+      animate={{ opacity: 1, x: -100 }}
+      exit={{ opacity: 0, x: -100 }}
+      transition={{ duration: 0.72 }}
+    >
       <div className="flex flex-col items-start gap-[28px] ">
         <Header />
         <div className="flex flex-col items-start gap-[28px] w-[416px]">
@@ -64,6 +71,6 @@ export default function ThirdForm({ setCurrentStep, currentStep }) {
         <BackButton handleClick={handleClickBack} />
         <Button handleClick={handleClick} currentStep={currentStep} />
       </div>
-    </div>
+    </motion.div>
   );
 }

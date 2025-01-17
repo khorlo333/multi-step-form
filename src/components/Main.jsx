@@ -2,6 +2,7 @@ import Input from "./Input";
 import { useState } from "react";
 import Button from "./Button";
 import Header from "./Header";
+import * as motion from "motion/react-client";
 
 export default function Main({ setCurrentStep, currentStep }) {
   const [formValues, setFormValues] = useState({
@@ -61,7 +62,13 @@ export default function Main({ setCurrentStep, currentStep }) {
     }
   };
   return (
-    <div className="w-[480px] min-h-[655px] p-[32px] rounded-[8px] flex flex-col justify-between items-start bg-[#fff]">
+    <motion.div
+      className="w-[480px] min-h-[655px] p-[32px] rounded-[8px] flex flex-col justify-between items-start bg-[#fff]"
+      initial={{ opacity: 0, x: 0 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 0 }}
+      transition={{ duration: 0.72 }}
+    >
       <div className="flex flex-col items-start gap-7 ">
         <Header />
         <div className="flex flex-col items-start gap-1 w-[416px]">
@@ -94,6 +101,6 @@ export default function Main({ setCurrentStep, currentStep }) {
       <div className="w-full">
         <Button handleClick={handleClick} currentStep={currentStep} />
       </div>
-    </div>
+    </motion.div>
   );
 }

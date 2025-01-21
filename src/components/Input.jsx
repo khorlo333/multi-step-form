@@ -5,6 +5,7 @@ export default function Input({
   errorText,
   name,
   type,
+  value,
 }) {
   return (
     <div className="flex flex-col items-start gap-2 self-stretch ">
@@ -13,6 +14,7 @@ export default function Input({
         <span className="text-[#e14942] text-[14px] font-semibold  ">*</span>
       </p>
       <input
+        value={value}
         name={name}
         type={type}
         className={`flex p-[12px] items-center self-stretch rounded-lg border-[1px] border-solid border-[#8b8e95] focus:outline-none focus:border-[#0ca5e9] ${

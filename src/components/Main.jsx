@@ -1,5 +1,5 @@
 import Input from "./Input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "./Button";
 import Header from "./Header";
 import * as motion from "motion/react-client";
@@ -15,6 +15,20 @@ export default function Main({ setCurrentStep, currentStep }) {
     lastName: "",
     username: "",
   });
+  useEffect(() => {
+    const firstname = localStorage.getItem("firstName");
+    const lastname = localStorage.getItem("lastName");
+    const username = localStorage.getItem("username");
+    if (firstname && lastname && username) {
+      console.log("kj");
+      setFormValues({
+        ...formValues,
+        firstName: firstname,
+        lastName: lastname,
+        username: username,
+      });
+    }
+  }, []);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormErrors((prev) => ({ ...prev, [name]: "" }));
@@ -58,7 +72,12 @@ export default function Main({ setCurrentStep, currentStep }) {
         username: "Текст оруулна уу",
       }));
     } else {
-      return setCurrentStep(currentStep + 1);
+      return (
+        setCurrentStep(currentStep + 1),
+        localStorage.setItem("firstName", formValues.firstName),
+        localStorage.setItem("lastName", formValues.lastName),
+        localStorage.setItem("username", formValues.username)
+      );
     }
   };
   return (
@@ -73,6 +92,7 @@ export default function Main({ setCurrentStep, currentStep }) {
         <Header />
         <div className="flex flex-col items-start gap-1 w-[416px]">
           <Input
+            value={formValues.firstName}
             onChange={handleChange}
             label="First name"
             placeholder="Your first name"
@@ -81,6 +101,7 @@ export default function Main({ setCurrentStep, currentStep }) {
             errorText={formErrors.firstName}
           />
           <Input
+            value={formValues.lastName}
             onChange={handleChange}
             label="Last name"
             placeholder="Your last name"
@@ -89,6 +110,7 @@ export default function Main({ setCurrentStep, currentStep }) {
             errorText={formErrors.lastName}
           />
           <Input
+            value={formValues.username}
             onChange={handleChange}
             label="Username"
             type="text"

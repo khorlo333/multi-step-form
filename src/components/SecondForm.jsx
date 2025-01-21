@@ -1,5 +1,5 @@
 import Input from "./Input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "./Button";
 import Header from "./Header";
 import BackButton from "./BackButton";
@@ -18,6 +18,23 @@ export default function SecondForm({ setCurrentStep, currentStep }) {
     password: "",
     confirmPassword: "",
   });
+
+  useEffect(() => {
+    const Email = localStorage.getItem("email");
+    const phonenumber = localStorage.getItem("phoneNumber");
+    const Password = localStorage.getItem("password");
+    const confirmpassword = localStorage.getItem("confirmPassword");
+    if (Email && phonenumber && Password && confirmpassword) {
+      console.log(Email && phonenumber && Password && confirmpassword);
+      setFormValues({
+        ...formValues,
+        email: Email,
+        phoneNumber: phonenumber,
+        password: Password,
+        confirmPassword: confirmpassword,
+      });
+    }
+  }, []);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormErrors((prev) => ({ ...prev, [name]: "" }));
@@ -77,7 +94,13 @@ export default function SecondForm({ setCurrentStep, currentStep }) {
         confirmPassword: "Таны оруулсан нууц үг таарахгүй байна.",
       }));
     } else {
-      return setCurrentStep(currentStep + 1);
+      return (
+        setCurrentStep(currentStep + 1),
+        localStorage.setItem("email", formValues.email),
+        localStorage.setItem("phoneNumber", formValues.phoneNumber),
+        localStorage.setItem("password", formValues.password),
+        localStorage.setItem("confirmPassword", formValues.confirmPassword)
+      );
     }
   };
 
@@ -101,6 +124,7 @@ export default function SecondForm({ setCurrentStep, currentStep }) {
             placeholder="Your email"
             type="email"
             name="email"
+            value={formValues.email}
             errorText={formErrors.email}
           />
           <Input
@@ -109,6 +133,7 @@ export default function SecondForm({ setCurrentStep, currentStep }) {
             type="number"
             placeholder="Your phone number"
             name="phoneNumber"
+            value={formValues.phoneNumber}
             errorText={formErrors.phoneNumber}
           />
           <Input
@@ -117,6 +142,7 @@ export default function SecondForm({ setCurrentStep, currentStep }) {
             type="password"
             placeholder="Your password"
             name="password"
+            value={formValues.password}
             errorText={formErrors.password}
           />
           <Input
@@ -125,6 +151,7 @@ export default function SecondForm({ setCurrentStep, currentStep }) {
             type="password"
             placeholder="Confirm your password "
             name="confirmPassword"
+            value={formValues.confirmPassword}
             errorText={formErrors.confirmPassword}
           />
         </div>

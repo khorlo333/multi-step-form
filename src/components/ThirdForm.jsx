@@ -127,7 +127,7 @@ export default function ThirdForm({ setCurrentStep, currentStep }) {
                 />
               ) : (
                 <div className="bg-zinc-200 w-full h-[200px] flex justify-center items-center flex-col">
-                  <img className="mx-auto" src="Uploadicon.svg" />
+                  <img className="mx-auto" src="/Main 1.png" />
 
                   <p className="text-[#334155] mt-3">Add image</p>
                 </div>

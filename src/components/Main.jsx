@@ -20,7 +20,6 @@ export default function Main({ setCurrentStep, currentStep }) {
     const lastname = localStorage.getItem("lastName");
     const username = localStorage.getItem("username");
     if (firstname && lastname && username) {
-      console.log("kj");
       setFormValues({
         ...formValues,
         firstName: firstname,

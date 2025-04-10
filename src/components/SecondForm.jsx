@@ -25,7 +25,6 @@ export default function SecondForm({ setCurrentStep, currentStep }) {
     const Password = localStorage.getItem("password");
     const confirmpassword = localStorage.getItem("confirmPassword");
     if (Email && phonenumber && Password && confirmpassword) {
-      console.log(Email && phonenumber && Password && confirmpassword);
       setFormValues({
         ...formValues,
         email: Email,

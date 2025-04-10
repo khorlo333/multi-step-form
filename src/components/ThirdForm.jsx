@@ -39,7 +39,7 @@ export default function ThirdForm({ setCurrentStep, currentStep }) {
     const newErrors = { ...formErrors };
 
     if (!formValues.dateOfBirth.trim()) {
-      newErrors.dateOfBirth = "Please select a date.";
+      newErrors.dateOfBirth = "Огноо сонгоно уу";
       isValid = false;
     } else {
       const currentDate = new Date();
@@ -53,13 +53,13 @@ export default function ThirdForm({ setCurrentStep, currentStep }) {
         (age === 18 &&
           (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)))
       ) {
-        newErrors.dateOfBirth = "You must be at least 18 years old.";
+        newErrors.dateOfBirth = "Та 18 нас хүрсэн байх ёстой.";
         isValid = false;
       }
     }
 
     if (!imageUrl) {
-      newErrors.profileImage = "Image cannot be blank";
+      newErrors.profileImage = "Зураг оруулна уу";
       isValid = false;
     }
 
